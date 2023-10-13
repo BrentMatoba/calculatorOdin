@@ -49,8 +49,15 @@ function updateDisplayNumber(){
     
 }
 function updateDisplayOperator(){
-
+    operator = this.innerHTML;
+    this.textContent;
+    if(display != 0){
+        display.innerHTML += operator;
+    }
 }
+
+//clear button
+//equals button
 
 
 //let button = document.getElementById("seven");
@@ -61,7 +68,10 @@ numbers.forEach(function(button){
     button.addEventListener("click", updateDisplayNumber);
 });
 
-
+let operators = document.querySelectorAll(".operatorButton")
+operators.forEach(function(button){
+    button.addEventListener("click", updateDisplayOperator)
+})
 
 
     //hitting equals calls operate function on num1, num2, operator.
