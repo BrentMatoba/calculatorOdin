@@ -1,0 +1,41 @@
+#container{
+    width: 500px;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    background-color: blue;
+}
+
+
+#screen{
+    width: 400px;
+    height: 100px;
+    background-color: grey;
+    border-top: 5px;
+    margin:auto;
+    margin-top: 30px;
+}
+
+#numpad{
+    width: 400px;
+    height: 350px;
+    background-color: black;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.row{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 25%;
+    background-color: red;
+    margin: left;
+}
+
+.column{
+    width: 20%;
+    height: 100%;
+    background-color: green;
+}

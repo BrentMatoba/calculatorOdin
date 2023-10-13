@@ -34,3 +34,14 @@ function operate(num1, num2, operator){
     else{console.log("Invalid operator");
     }
 }
+
+
+
+
+
+
+for(let i=0; i < 4; i++){
+    let numpad = document.getElementById("numpad");
+    document.createElement("div");
+
+}
