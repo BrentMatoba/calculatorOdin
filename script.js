@@ -53,8 +53,15 @@ function updateDisplayOperator(){
 }
 
 
-let button = document.getElementById("seven");
-button.addEventListener("click", updateDisplayNumber); //remember not to put () on the function, makes it act immediately instead of waiting for the click
+//let button = document.getElementById("seven");
+//button.addEventListener("click", updateDisplayNumber); //remember not to put () on the function, makes it act immediately instead of waiting for the click
+
+let numbers = document.querySelectorAll(".numberButton")
+numbers.forEach(function(button){
+    button.addEventListener("click", updateDisplayNumber);
+});
+
+
 
 
     //hitting equals calls operate function on num1, num2, operator.
