@@ -33,9 +33,12 @@ function operate(num1, num2, operator){
         divide(num1, num2);
     }
     else{console.log("Invalid operator");
-        return 0;
     }}
 
+
+function updateDisplayClear(){
+    display.innerHTML = 0;
+}
 function updateDisplayNumber(){
     //get number from button
     number = this.textContent;
@@ -71,6 +74,11 @@ numbers.forEach(function(button){
 let operators = document.querySelectorAll(".operatorButton")
 operators.forEach(function(button){
     button.addEventListener("click", updateDisplayOperator)
+})
+
+let clear = document.querySelectorAll(".clearButton")
+clear.forEach(function(button){
+    button.addEventListener("click", updateDisplayClear)
 })
 
 
