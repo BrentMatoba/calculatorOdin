@@ -27,10 +27,28 @@ function parseData(){
 
     const pattern = /(\d+|[+\-x/])/g;
     let parsedDisplay = display.innerHTML.match(pattern);
+    if (parsedDisplay.length == 3){
+        num1 = parsedDisplay[0];
+        num2 = parsedDisplay[2];
+        operator = parsedDisplay[1];
+        answer = operate(num1, num2, operator);
+        display.innerHTML = answer;
+    }
+    else if(parsedDisplay.length < 3){
+        display.innerHTML = "ERROR";
+    }
+    else{calculateLong()};
+}
+
+
+function calculateLong(){
     for (let i = 0; i < parsedDisplay.length; i++){
-        if(parsedDisplay[i] == "*" || "/"){
-            let previousNumber = parseInt(parsedDisplay[i-1]);
-            let nextNumber = parseInt(parsedDisplay[i+1]);
+        if(parsedDisplay[i] === "x" || parsedDisplay[i] === "/"){
+            num1 = parseInt(parsedDisplay[i-1]);
+            num2 = parseInt(parsedDisplay[i+1]);
+            operator = parsedDisplay[i];
+            let answer = operate(num1, num2, operator);
+            //modify parsedDisplay so that the 3 items are removed and replaced with answer
         }
     }
 
@@ -39,16 +57,22 @@ function parseData(){
 
 function operate(num1, num2, operator){
     if(operator == "+"){
-        console.log(add(num1, num2));
+        return add(num1, num2);
     }
     else if(operator == "-"){
-        subtract(num1, num2);
+        return subtract(num1, num2);
     }
-    else if(operator == "*"){
-        multiply(num1, num2);
+    else if(operator == "x"){
+        return multiply(num1, num2);
     }
     else if(operator == "/"){
-        divide(num1, num2);
+        if(num2 == 0){
+            return "Can't divide by 0 :)"
+        }
+        else{
+            return divide(num1, num2);
+        }
+
     }
     else{console.log("Invalid operator");
     }}
@@ -56,6 +80,9 @@ function operate(num1, num2, operator){
 
 function updateDisplayClear(){
     display.innerHTML = 0;
+    num1 = null;
+    num2 = null;
+    operator = null;
 }
 function updateDisplayNumber(){
     //get number from button
@@ -102,7 +129,7 @@ clear.forEach(function(button){
 
 let test = document.querySelectorAll(".equals");
 test.forEach(function(button){
-    button.addEventListener("click", operate)
+    button.addEventListener("click", parseData);
 })
 
 
