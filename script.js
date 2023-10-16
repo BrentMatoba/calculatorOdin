@@ -19,7 +19,20 @@ function divide(num1, num2){
     return num1/num2
 }
 
+//use reduce() with this function (Probably need to modify it a bit) for the equals functionality. Watch that JS30 exercise guy for the how to affect previous and next numbers.
+
+
 function operate(num1, num2, operator){
+    //make regex, separate display into array of numbers and operators
+    //check if first and last values are numbers, else throw error
+    //iterate over and find x or /, then combine
+    //iterate over and find + or -, then combine
+
+    const pattern = /(\d+|[+\-x/])/g;
+    let parsedDisplay = display.innerHTML.match(pattern);
+    console.log(parsedDisplay);
+
+    
     if(operator == "+"){
         console.log(add(num1, num2));
     }
@@ -49,6 +62,7 @@ function updateDisplayNumber(){
         display.textContent += number;
     }
     //update display
+    console.log(display.innerHTML.length);
     
 }
 function updateDisplayOperator(){
@@ -80,6 +94,14 @@ let clear = document.querySelectorAll(".clearButton")
 clear.forEach(function(button){
     button.addEventListener("click", updateDisplayClear)
 })
+
+let test = document.querySelectorAll(".equals");
+test.forEach(function(button){
+    button.addEventListener("click", operate)
+})
+
+
+
 
 
     //hitting equals calls operate function on num1, num2, operator.
