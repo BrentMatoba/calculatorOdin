@@ -35,27 +35,48 @@ function parseData(){
         display.innerHTML = answer;
     }
     else if(parsedDisplay.length < 3){
-        display.innerHTML = "ERROR";
+        display.innerHTML = "INVALID INPUT";
     }
-    else{calculateLong()};
+    else{calculateLong(parsedDisplay)};
 }
 
 
-function calculateLong(){
-    for (let i = 0; i < parsedDisplay.length; i++){
+function calculateLong(parsedDisplay){
+    //calculates all x and / expressions
+    originalLength = parsedDisplay.length
+    for (let i = 0; i < originalLength; i++){
         if(parsedDisplay[i] === "x" || parsedDisplay[i] === "/"){
             num1 = parseInt(parsedDisplay[i-1]);
             num2 = parseInt(parsedDisplay[i+1]);
             operator = parsedDisplay[i];
-            let answer = operate(num1, num2, operator);
-            //modify parsedDisplay so that the 3 items are removed and replaced with answer
+            let expressionAnswer = operate(num1, num2, operator);
+
+            parsedDisplay.splice(i-1, 3, String(expressionAnswer));
+            i = 0;
         }
     }
+
+    for(let i=0; i < originalLength; i++){
+        if(parsedDisplay[i] === "+" || parsedDisplay[i] === "-"){
+            num1 = parseInt(parsedDisplay[i-1]);
+            num2 = parseInt(parsedDisplay[i+1]);
+            operator = parsedDisplay[i];
+            let expressionAnswer = operate(num1, num2, operator);
+
+            parsedDisplay.splice(i-1, 3, String(expressionAnswer));
+            i=0;
+        }
+    }
+    console.log(parsedDisplay);
+    
+    //calculates all + and - expressions
 
     
 }
 
 function operate(num1, num2, operator){
+    num1 = parseInt(num1);
+    num2 = parseInt(num2);
     if(operator == "+"){
         return add(num1, num2);
     }
