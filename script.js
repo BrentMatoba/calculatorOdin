@@ -20,19 +20,24 @@ function divide(num1, num2){
 }
 
 //use reduce() with this function (Probably need to modify it a bit) for the equals functionality. Watch that JS30 exercise guy for the how to affect previous and next numbers.
-
-
-function operate(num1, num2, operator){
-    //make regex, separate display into array of numbers and operators
-    //check if first and last values are numbers, else throw error
+function parseData(){
+        //make regex, separate display into array of numbers and operators
     //iterate over and find x or /, then combine
     //iterate over and find + or -, then combine
 
     const pattern = /(\d+|[+\-x/])/g;
     let parsedDisplay = display.innerHTML.match(pattern);
-    console.log(parsedDisplay);
+    for (let i = 0; i < parsedDisplay.length; i++){
+        if(parsedDisplay[i] == "*" || "/"){
+            let previousNumber = parseInt(parsedDisplay[i-1]);
+            let nextNumber = parseInt(parsedDisplay[i+1]);
+        }
+    }
 
     
+}
+
+function operate(num1, num2, operator){
     if(operator == "+"){
         console.log(add(num1, num2));
     }
@@ -62,7 +67,7 @@ function updateDisplayNumber(){
         display.textContent += number;
     }
     //update display
-    console.log(display.innerHTML.length);
+    display.innerHTML.length;
     
 }
 function updateDisplayOperator(){
