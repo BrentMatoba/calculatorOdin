@@ -1,8 +1,8 @@
-//add, subtract, multiply, divide
+//calculator project from The Odin Project.
 let num1;
 let num2;
 let operator;
-let display = document.getElementById("screenText");
+let display = document.getElementById("screenText"); //calculator screen
 
 
 
@@ -16,15 +16,11 @@ function multiply(num1, num2){
     return num1 * num2;
 }
 function divide(num1, num2){
-    return num1/num2
+    return num1/num2;
 }
 
-//use reduce() with this function (Probably need to modify it a bit) for the equals functionality. Watch that JS30 exercise guy for the how to affect previous and next numbers.
 function parseData(){
-        //make regex, separate display into array of numbers and operators
-    //iterate over and find x or /, then combine
-    //iterate over and find + or -, then combine
-
+    //parses equation into manipulateable data, then determines length of equation
     const pattern = /(\d+|[+\-x/])/g;
     let parsedDisplay = display.innerHTML.match(pattern);
     if (parsedDisplay.length == 3){
@@ -42,7 +38,8 @@ function parseData(){
 
 
 function calculateLong(parsedDisplay){
-    //calculates all x and / expressions
+    //function for calculating equations with more tha one expression
+    //calculates all multiplication and division expressions
     originalLength = parsedDisplay.length
     for (let i = 0; i < originalLength; i++){
         if(parsedDisplay[i] === "x" || parsedDisplay[i] === "/"){
@@ -55,7 +52,7 @@ function calculateLong(parsedDisplay){
             i = 0;
         }
     }
-
+    //calculates all addition and subtraction expressions
     for(let i=0; i < originalLength; i++){
         if(parsedDisplay[i] === "+" || parsedDisplay[i] === "-"){
             num1 = parseInt(parsedDisplay[i-1]);
@@ -67,14 +64,12 @@ function calculateLong(parsedDisplay){
             i=0;
         }
     }
-    console.log(parsedDisplay);
-    
-    //calculates all + and - expressions
-
-    
+    //updates display with final answer
+    display.innerHTML = parsedDisplay;
 }
 
 function operate(num1, num2, operator){
+    //arithmetic function
     num1 = parseInt(num1);
     num2 = parseInt(num2);
     if(operator == "+"){
@@ -100,12 +95,14 @@ function operate(num1, num2, operator){
 
 
 function updateDisplayClear(){
+    //clears all data from calculator, resets to 0
     display.innerHTML = 0;
     num1 = null;
     num2 = null;
     operator = null;
 }
 function updateDisplayNumber(){
+    //adds number to display
     //get number from button
     number = this.textContent;
     if(display.textContent == 0){
@@ -119,6 +116,7 @@ function updateDisplayNumber(){
     
 }
 function updateDisplayOperator(){
+    //adds operator to display
     operator = this.innerHTML;
     this.textContent;
     if(display != 0){
@@ -126,13 +124,11 @@ function updateDisplayOperator(){
     }
 }
 
-//clear button
-//equals button
 
 
-//let button = document.getElementById("seven");
-//button.addEventListener("click", updateDisplayNumber); //remember not to put () on the function, makes it act immediately instead of waiting for the click
 
+
+//adds functions to different buttons on calculator
 let numbers = document.querySelectorAll(".numberButton")
 numbers.forEach(function(button){
     button.addEventListener("click", updateDisplayNumber);
@@ -152,16 +148,5 @@ let test = document.querySelectorAll(".equals");
 test.forEach(function(button){
     button.addEventListener("click", parseData);
 })
-
-
-
-
-
-    //hitting equals calls operate function on num1, num2, operator.
-    //how do i handle multiple operators?
-    //how do i display?
-    //make buttons able to show on display
-        //numbers in display probably stored as strings so that I can += to add numbers next to each other, then converted to int upon calculation.
-        //each button should += a target
 
 
